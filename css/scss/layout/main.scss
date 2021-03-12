@@ -8,25 +8,23 @@
 .trigger-pin{
     position: absolute;
     top: 0;
+    left: 50%;
     width: 200px;
-    //height: 300vh;
+    height: calc(100% - 85vh);
     opacity: 0.5;
     background-color: grey;
+    z-index: 1;
 }
 
 .frame{
+    background-color: aquamarine;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     width: 100vw;  
-    height: 100vh;
-    //overflow-y: scroll;
-
+    // height: 300vh;
     margin-top: 50px;
     border: 3px solid pink;
-    
+    overflow-y: hidden;
+    overflow-x: hidden;
 
     @media only screen and (min-device-width: 1366px) {
         margin-top: 50px;
@@ -38,6 +36,9 @@
     &__child{
         position: absolute;
         top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
         width: 84%;
         height: 82%;
 
@@ -48,6 +49,9 @@
     }
 }
 
+.sections-container{
+    height: 100%;
+}
 
 .section{
     &__bg-image{
@@ -55,9 +59,9 @@
         width: 100%;
         height: 88vh;
         @media only screen and (min-device-width: 1366px) {
-            object-fit: none;
-            width: 90%;
-            height: 90vh;
+            width: 100%;
+            height: 100%;
+            margin-top: 0px;
         }
     }
 }
@@ -100,11 +104,12 @@
     align-items: center;
     width: 100%;
     height: 100%;
+    z-index: 11;
 
     img{
-        width: 95%;
+        width: 80%;
         @media only screen and (min-device-width: 1366px){
-            height: auto;
+            width: 50%;
         }
     }
 
@@ -119,10 +124,9 @@
         color: white;
         text-align: center;
         font-size: 16px;
-        width: 90%;
+        width: 100%;
     
-        @media only screen and (min-device-width: 1366px){
-            
+        @media only screen and (min-device-width: 1366px){            
             width: 60%;
         }
     
@@ -135,17 +139,18 @@
 }
 
 .cta {
-	background-color:#ffffff;
-	border-radius:10px;
-	border:1px solid #ffffff;
-	display:inline-block;
-	cursor:pointer;
-	color:#c9b657;
-	font-family:Arial;
-	font-size:16px;
-	padding:10px 26px;
-    text-decoration:none;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #fff;
+    display: inline-block;
+    cursor: pointer;
+    color: #c9b657;
+    font-family: Arial;
+    font-size: 16px;
+    padding: 10px 26px;
+    text-decoration: none;
     font-weight: 800;
+    z-index: 15;
 }
 .cta:hover {
 	background-color:#ffffff;
@@ -259,7 +264,7 @@
 .indicators-container{
     position: absolute;
     left: 0;
-    top: 50%;
+    top: 45vh;
     transform: translateY(-50%);
     width: 7vw;
     background-color: white;
