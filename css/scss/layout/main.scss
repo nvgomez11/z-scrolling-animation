@@ -164,8 +164,16 @@
     background-color: red;
     opacity: 0.5;
     position: absolute;
-    width: 100px;
+    width: 130px;
     height: 20vh;
+}
+
+.cloud-trigger{
+    background-color: blueviolet;
+    opacity: 0.5;
+    position: absolute;
+    width: 130px;
+    height: 25vh;
 }
 
 
@@ -177,7 +185,7 @@
 .cloud{
     position: fixed;
     height: 200px;
-    transform: perspective(300px) translateZ(0px);
+    // transform: perspective(500px) translateZ(50px);
     z-index: 10;
     @media only screen and (min-device-width: 1366px){
       height: 350px;
@@ -189,7 +197,7 @@
     left: -351px;
 
     @media only screen and (min-device-width: 1366px){
-        top: -170px;
+        top: -65px;
         left: -435px;
     } 
 }
@@ -199,8 +207,8 @@
     bottom: -65px;
 
     @media only screen and (min-device-width: 1366px){
-        bottom: -111px;
-        left: -520px;
+        bottom: -36px;
+        left: -415px;
     }
   }
   
@@ -208,7 +216,7 @@
     top: -66px;
     right: -470px;
     @media only screen and (min-device-width: 1366px){
-        top: -222px;
+        top: -155px;
         right: -367px;
     }
   
@@ -218,8 +226,8 @@
     top: -97px;
     right: -371px;
     @media only screen and (min-device-width: 1366px){
-        top: -97px;
-        right: -603px;
+        top: -73px;
+        right: -560px;
     }
 
   }
@@ -228,8 +236,8 @@
     bottom: -83px;
     right: -937px;
     @media only screen and (min-device-width: 1366px){
-        bottom: -100px;
-        right: -1313px;
+        bottom: -15px;
+        right: -1317px;
     }
 }
 
@@ -266,22 +274,27 @@
     left: 0;
     top: 45vh;
     transform: translateY(-50%);
-    width: 7vw;
-    background-color: white;
-    border: 2px solid white;
-    border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    width: 50px;
+    //background-color: white;
     z-index: 4;
 
     @media only screen and (min-device-width: 1366px) {        
-        width: 4vw;    
+        width: 110px;    
         margin-top: 0px;        
     }
 
     &__controls{
+        //background-color: brown;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        background-color: white;
+        border: 2px solid white;
+        border-radius: 25px;
+        width: 7vw;
         padding-left: 0px;
         list-style-type: none;
         div {
@@ -289,10 +302,25 @@
             height: 10px;
             border-radius: 20px;
             margin: 15px 0px 15px 0px;
-            background-color: rgb(139,112,67);
+            background-color: white;
+            border: 2px solid rgb(139,112,67);
+            &:hover{
+                background-color: rgb(139,112,67);
+            }
         }
     }
+
+    &__labels{
+        //background-color: burlywood;
+        color: rgb(139,112,67);
+        margin-left: 7px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        visibility: hidden;
+    }
 }
+
 
 .icons-container{
     position: absolute;

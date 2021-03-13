@@ -6,6 +6,7 @@ $( document ).ready(function() {
     console.log("amount of sections", amountSection);
     $(".frame").css('height', amountSection)
 
+
     //SET SECTIONS PERSPECTIVE AND OPACITY
     var perspective = '500px'
     var sectionDiference = 500 
@@ -20,7 +21,20 @@ $( document ).ready(function() {
         }
     });
 
-    
+    //SET CLOUDS PERSPECTIVE AND OPACITY
+    var cloudsPerspective = '500px'
+    var cloudsDiference = 500 
+    $('.clouds-container').each(function(i) {
+        var cloudsZvalue = ((-i * cloudsDiference)+100).toString() + 'px'; 
+        if(i == 0){
+            $(this).css('transform', 'perspective('+ cloudsPerspective +') translateZ(100px)');
+            $(this).css('opacity', '1');
+        }else{
+            $(this).css('transform', 'perspective('+ cloudsPerspective +') translateZ('+ cloudsZvalue +')');
+            $(this).css('opacity', '0');
+        }
+    });
+
     //INSERT TRIGGERS DYNAMICALLY
     $('.section').each(function(i) {
         var trigger = '<div class="trigger"></div>';
@@ -28,13 +42,30 @@ $( document ).ready(function() {
     });
 
 
-    //TRIGGER POSITION DINAMICALLY
+    //INSERT CLOUD TRIGGERS DYNAMICALLY
+    $('.section').each(function(i) {
+        var cloudTrigger = '<div class="cloud-trigger"></div>';
+        $(".frame").append(cloudTrigger);
+    });
+
+
+    //SET TRIGGER POSITION DINAMICALLY
     var startingTriggerTop = 100
     $('.trigger').each(function(i) {
         if(i==0){
-            $(this).css('top', '0vh');
+            $(this).css('top', '10vh');
         }else{
-            $(this).css('top', (startingTriggerTop * (i) ) + 'vh');
+            $(this).css('top', ((startingTriggerTop * (i) ) + 10 ) + 'vh');
+        }
+    });
+
+    //SET CLOUD TRIGGER POSITION DINAMICALLY
+    var startingTriggerTop = 100
+    $('.cloud-trigger').each(function(i) {
+        if(i==0){
+            $(this).css('top', '5vh');
+        }else{
+            $(this).css('top', ( (startingTriggerTop * i) + 5 ) + 'vh');
         }
     });
 
@@ -53,37 +84,43 @@ $( document ).ready(function() {
     //INSERT INDICATORS DYNAMICALLY
     $('.section').each(function(i) {
         var trigger = "#trigger" + (i.toString());
-        var indicator = '<a class="indicator" onclick="testing(\''+ trigger +'\')"><div></div></a>'
+        var indicator = '<a onclick="testing(\''+ trigger +'\')"><div></div></a>'
         console.log("INDICATOR", indicator);
         $(".indicators-container__controls").append(indicator);
     });
 
-    
+
 
     if(!$(".frame").hasClass('frame--edit')){
         //SET TRIGGER-PIN HEIGHT
         var sections = document.querySelectorAll('.section');
         var sectionsLength = ((sections.length * 100)-120 ).toString() + 'vh';
-        console.log("sections length", sectionsLength)
+        console.log("sections length", sectionsLength);
         $(".trigger-pin").height(sectionsLength);
-    
-    
-        //SET PERSPECTIVE AND Z VALUE OF EACH SECTION
-        console.log("GOOGOGOGOGOG");
-    
-        //animation
+
+
+
+        var opacityValues = [0, 1];
+        console.log("opacity values are", opacityValues);
+
+
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        ////////////////////////BRING SECTIONS///////////////////////////
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+
+        //FRAMES TO MOVE
         var frames = document.querySelectorAll('.section');
         var framesLength = frames.length
         var arrayFrames = Array.prototype.slice.call(frames);
-    
         console.log("array frames", arrayFrames);
     
-        //Fill Triggers 
+        //GET TRIGGERS 
         var triggers = document.querySelectorAll(".trigger");
-        console.log("Triggers are", triggers)
+        console.log("Triggers are", triggers);
     
-    
-        //Fill Z Values
+        //FILL Z VALUES
         var originalZValues = [];
         for(var j=0; j<framesLength; j++){
             if (j==0){
@@ -92,16 +129,12 @@ $( document ).ready(function() {
                 originalZValues.push(500 * -j)
             }
         }
-        console.log("Z values are", originalZValues)
+        console.log("Z values are", originalZValues);
     
-    
-        var opacityValues = [0, 1];
-        console.log("opacity values are", opacityValues);
-    
-    
-    
+
         gsap.registerPlugin(ScrollTrigger);
-    
+        
+
         for(var i = 0; i < triggers.length -1; i++){
             var currentTrigger = triggers[i];
             var initialZvalues = []
@@ -131,7 +164,6 @@ $( document ).ready(function() {
                     }
                 }
             });
-    
             for(var j = 0; j < originalZValues.length; j++){
     
                 var initialValue = initialZvalues[j];
@@ -171,28 +203,112 @@ $( document ).ready(function() {
             }
             console.log("NEXT TRIGGER ---------------");
         }
+
+
+
+
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        ////////////////////////BRING CLOUDS/////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+
+        //FRAMES TO MOVE
+        var cloudFrames = document.querySelectorAll('.clouds-container');
+        var cloudFramesLength = cloudFrames.length;
+        var arrayCloudFrames = Array.prototype.slice.call(cloudFrames);
+        console.log("Array cloud frames", arrayCloudFrames);
     
+        //GET TRIGGERS 
+        var cloudTriggers = document.querySelectorAll(".cloud-trigger");
+        console.log("Cloud triggers are", cloudTriggers);
     
+        //FILL Z VALUES
+        var originalZcloudsValues = [];
+        for(var j=0; j<cloudFramesLength; j++){
+            if (j==0){
+                originalZcloudsValues.push(100)
+            }else{
+                originalZcloudsValues.push(400 * -j)
+            }
+        }
+        console.log("Z values are", originalZcloudsValues);
+
+
+        for(var i = 0; i < cloudTriggers.length -1; i++){
+            var currentCloudTrigger = cloudTriggers[i];
+            var initialZcloudValues = []
+            var finalZcloudValues = []
+            //fill initial z values
+            for(var w=0; w<originalZcloudsValues.length; w++){
+                initialZcloudValues.push( originalZcloudsValues[w] + (400 * i ));
+            }
+            console.log("initial z cloud values", initialZvalues);
+            //fill final z values
+            for(var w=0; w<originalZcloudsValues.length; w++){
+                finalZcloudValues.push( originalZcloudsValues[w] + (400 * (i + 1)));
+            }
+            console.log("final z cloud values", finalZvalues);
     
+            var tcloud = gsap.timeline({
+                onComplete: function(){ console.log("Hola")},
+                scrollTrigger: {
+                    trigger: currentCloudTrigger,
+                    start: 'top 10px',
+                    end: 'bottom 0px',
+                    scrub: 2,
+                    // onEnter onLeave onEnterBack onLeaveBack
+                    toggleActions: "play none reverse none",
+                    markers: {
+                        startColor: "purple", 
+                        endColor: "black",
+                        fontSize: '2.5rem'
+                    }
+                }
+            });
+            for(var j = 0; j < originalZcloudsValues.length; j++){
     
-        //Frame container height dinamically set depending on the amount of frames
-        // var framesContainerHeight = (100 * framesLength).toString() + 'vh';
-        // $('.frame').height(framesContainerHeight);
+                var initialValue = initialZcloudValues[j];
+                var finalValue = finalZcloudValues[j];
     
+                var initialOpacity = undefined; 
+                var finalOpacity = undefined;
     
-        // $('.section').each(function(i) {
-        //     let st = ScrollTrigger.create({
-        //         trigger: ".trigger-pin",
-        //         pin: $(this),
-        //         start: "top 6%",
-        //         end: "bottom 0.5%",
-        //         markers: {
-        //             startColor: "orange", endColor: "orange", fontSize: "16px"
-        //         }
-        //     });
-        // });
+                if (finalValue === 500){
+                    initialOpacity = 1
+                    finalOpacity = 0
+                }
+                if(finalValue === 0){
+                    initialOpacity = 0
+                    finalOpacity = 1
+                }
+            
+                tcloud.fromTo(arrayCloudFrames[j], {
+                    z: initialValue,
+                    immediateRender: false,
+                    duration: 3,
+                    opacity: initialOpacity
+                }, {
+                    z: finalValue,
+                    immediateRender: false,
+                    duration: 3,
+                    opacity: finalOpacity
+                }, 0);
+
+                console.log("------------CLOUDS--------------")
+                console.log("Creado asi ----")
+                console.log("Frame", arrayCloudFrames[j]);
+                console.log("initial Z value", initialValue)
+                console.log("final  Z value", finalValue)
+                console.log("opacidad inicial", initialOpacity);
+                console.log("opacidad final", finalOpacity);
+                console.log("Trigger", currentCloudTrigger);
+                console.log("end -----")        
+            }
+            console.log("NEXT TRIGGER ---------------");
+        }
     
-    
+        
         let st = ScrollTrigger.create({
             trigger: ".trigger-pin",
             pin: ".sections-container",
@@ -202,103 +318,22 @@ $( document ).ready(function() {
                 startColor: "orange", endColor: "orange", fontSize: "16px"
             }
         });
-    
-    
-    
-    
-    
-        // window.addEventListener('scroll',(event) => {
-        //     var y = window.scrollY
-    
-        //     console.log(y);
-    
-        //     // $('.trigger').each(function(i) {
-        //     //     var trigger = $(this);
-        //     //     var position = trigger.offset();
-        //     //     console.log("Trigger #", i);
-        //     //     console.log("Has position", position);
-        //     // });
-        // });
-    
-    
-    
-        // function testing(trigger){
-        //     console.log("jajajaja");
-        //     var triggerElement = $(trigger);
-        //     var bodyElement = $("body"); 
-        //     console.log("trigger element is", triggerElement);
-        //     console.log($(trigger).offset());
-    
-        //     //var position = 0
-        //     // var position = trigger1.offset().top  
-        //     //     - documentt.offset().top  
-        //     //     + documentt.scrollTop(); 
-        //     // if(trigger=="#trigger0"){
-        //     //     position = 1125
-        //     // }
-        //     // if(trigger=="#trigger1"){
-        //     //     position = 1961
-        //     // }
-        //     // $([document.documentElement, document.body]).animate({
-        //     //     scrollTop: 0
-        //     // }, 2000);
-    
-        //     // $('html, body').animate({
-        //     //     scrollTop: 100,
-        //     // }, 1000);
-        //     //window.scrollBy(0, 1125);
-        //     //Window.scroll(0, 1125);
-            
-        // }
-    
-    
-    
-        // var documentt = $("body"); 
-        // var trigger1 = $("#trigger1"); 
-        // console.log("q pasa");
-        // console.log("trigger 1 offset", trigger1);
-    
-        // // Calculating new position of scrollbar 
-        // var position = trigger1.offset().top  
-        //         - documentt.offset().top  
-        //         + documentt.scrollTop(); 
-        // console.log("position is", position);
-        // // Setting the value of scrollbar 
-    
-        // document.scrollTop(position);
+
     }
 
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+document.addEventListener('scroll', function(e) {
+    $(".section").each(function(i){
+        var zValue = parseFloat($(this).css('transform').split(',')[14]);
+        if(zValue>500 || zValue<-400){
+            $(this).css('visibility','hidden');
+        }else{
+            $(this).css('visibility','visible');
+        }
+    })
+});
 
 //HARDCODED WORKING
 // gsap.registerPlugin(ScrollTrigger);
