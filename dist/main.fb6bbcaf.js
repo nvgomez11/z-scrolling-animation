@@ -142,13 +142,27 @@ $(document).ready(function () {
   var cloudsPerspective = '500px';
   var cloudsDiference = 500;
   $('.clouds-container').each(function (i) {
-    var cloudsZvalue = (-i * cloudsDiference + 100).toString() + 'px';
+    var cloudsZvalue = (-i * cloudsDiference + 200).toString() + 'px';
 
     if (i == 0) {
       $(this).css('transform', 'perspective(' + cloudsPerspective + ') translateZ(100px)');
       $(this).css('opacity', '1');
     } else {
       $(this).css('transform', 'perspective(' + cloudsPerspective + ') translateZ(' + cloudsZvalue + ')');
+      $(this).css('opacity', '0');
+    }
+  }); //SET CONTENT PERSPECTIVE AND OPACITY
+
+  var contentPerspective = '500px';
+  var contentDiference = 500;
+  $('.content').each(function (i) {
+    var contentZvalue = (-i * contentDiference + 100).toString() + 'px';
+
+    if (i == 0) {
+      $(this).css('transform', 'perspective(' + contentPerspective + ') translateZ(100px)');
+      $(this).css('opacity', '1');
+    } else {
+      $(this).css('transform', 'perspective(' + contentPerspective + ') translateZ(' + contentZvalue + ')');
       $(this).css('opacity', '0');
     }
   }); //INSERT TRIGGERS DYNAMICALLY
@@ -161,23 +175,37 @@ $(document).ready(function () {
   $('.section').each(function (i) {
     var cloudTrigger = '<div class="cloud-trigger"></div>';
     $(".frame").append(cloudTrigger);
-  }); //SET TRIGGER POSITION DINAMICALLY
+  }); //INSERT CONTENT TRIGGERS DYNAMICALLY
 
-  var startingTriggerTop = 100;
-  $('.trigger').each(function (i) {
-    if (i == 0) {
-      $(this).css('top', '10vh');
-    } else {
-      $(this).css('top', startingTriggerTop * i + 10 + 'vh');
-    }
+  $('.section').each(function (i) {
+    var contentTrigger = '<div class="content-trigger"></div>';
+    $(".frame").append(contentTrigger);
   }); //SET CLOUD TRIGGER POSITION DINAMICALLY
 
   var startingTriggerTop = 100;
   $('.cloud-trigger').each(function (i) {
     if (i == 0) {
-      $(this).css('top', '5vh');
+      $(this).css('top', '10vh');
     } else {
-      $(this).css('top', startingTriggerTop * i + 5 + 'vh');
+      $(this).css('top', startingTriggerTop * i + 10 + 'vh');
+    }
+  }); //SET CONTENT TRIGGER POSITION DINAMICALLY
+
+  var startingTriggerTop = 100;
+  $('.content-trigger').each(function (i) {
+    if (i == 0) {
+      $(this).css('top', '15vh');
+    } else {
+      $(this).css('top', startingTriggerTop * i + 15 + 'vh');
+    }
+  }); //SET TRIGGER POSITION DINAMICALLY
+
+  var startingTriggerTop = 100;
+  $('.trigger').each(function (i) {
+    if (i == 0) {
+      $(this).css('top', '20vh');
+    } else {
+      $(this).css('top', startingTriggerTop * i + 20 + 'vh');
     }
   }); //SET TRIGGER ID DINAMICALLY
 
@@ -256,10 +284,10 @@ $(document).ready(function () {
           end: 'bottom 0px',
           scrub: 2,
           // onEnter onLeave onEnterBack onLeaveBack
-          toggleActions: "play none reverse none",
-          markers: {
-            fontSize: '2rem'
-          }
+          toggleActions: "play none reverse none" // markers: {
+          //     fontSize: '2rem'
+          // }
+
         }
       });
 
@@ -355,12 +383,12 @@ $(document).ready(function () {
           end: 'bottom 0px',
           scrub: 2,
           // onEnter onLeave onEnterBack onLeaveBack
-          toggleActions: "play none reverse none",
-          markers: {
-            startColor: "purple",
-            endColor: "black",
-            fontSize: '2.5rem'
-          }
+          toggleActions: "play none reverse none" // markers: {
+          //     startColor: "purple", 
+          //     endColor: "black",
+          //     fontSize: '2.5rem'
+          // }
+
         }
       });
 
@@ -399,6 +427,108 @@ $(document).ready(function () {
         console.log("opacidad inicial", initialOpacity);
         console.log("opacidad final", finalOpacity);
         console.log("Trigger", currentCloudTrigger);
+        console.log("end -----");
+      }
+
+      console.log("NEXT TRIGGER ---------------");
+    } /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+    ////////////////////////BRING CONTENT///////////////////////////
+    /////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////
+
+
+    console.log("START CONTENT ANIMATION"); //FRAMES TO MOVE
+
+    var contentFrames = document.querySelectorAll('.content');
+    var contentFramesLength = contentFrames.length;
+    var arrayContentFrames = Array.prototype.slice.call(contentFrames);
+    console.log("content array frames", arrayContentFrames); //GET TRIGGERS 
+
+    var contentTriggers = document.querySelectorAll(".content-trigger");
+    console.log("Triggers are", contentTriggers); //FILL Z VALUES
+
+    var originalZcontentValues = [];
+
+    for (var j = 0; j < contentFramesLength; j++) {
+      if (j == 0) {
+        originalZcontentValues.push(100);
+      } else {
+        originalZcontentValues.push(400 * -j);
+      }
+    }
+
+    console.log("Z values are", originalZcontentValues);
+
+    for (var i = 0; i < contentTriggers.length - 1; i++) {
+      var currentContentTrigger = contentTriggers[i];
+      var initialZcontentValues = [];
+      var finalZcontentValues = []; //fill initial z values
+
+      for (var w = 0; w < originalZcontentValues.length; w++) {
+        initialZcontentValues.push(originalZcontentValues[w] + 400 * i);
+      }
+
+      console.log("initial z values", initialZcontentValues); //fill final z values
+
+      for (var w = 0; w < originalZcontentValues.length; w++) {
+        finalZcontentValues.push(originalZcontentValues[w] + 400 * (i + 1));
+      }
+
+      console.log("final z values", finalZcontentValues);
+      var timelineContent = gsap.timeline({
+        onComplete: function onComplete() {
+          console.log("Hola");
+        },
+        scrollTrigger: {
+          trigger: currentContentTrigger,
+          start: 'top 10px',
+          end: 'bottom 0px',
+          scrub: 2,
+          // onEnter onLeave onEnterBack onLeaveBack
+          toggleActions: "play none reverse none",
+          markers: {
+            startColor: "greenyellow",
+            endColor: "greenyellow",
+            fontSize: '2.5rem'
+          }
+        }
+      });
+
+      for (var j = 0; j < originalZcontentValues.length; j++) {
+        var initialValue = initialZcontentValues[j];
+        var finalValue = finalZcontentValues[j];
+        var initialOpacity = undefined;
+        var finalOpacity = undefined;
+
+        if (finalValue === 500) {
+          initialOpacity = 1;
+          finalOpacity = 0;
+        }
+
+        if (finalValue === 0) {
+          initialOpacity = 0;
+          finalOpacity = 1;
+        }
+
+        timelineContent.fromTo(arrayContentFrames[j], {
+          z: initialValue,
+          immediateRender: false,
+          duration: 3,
+          opacity: initialOpacity
+        }, {
+          z: finalValue,
+          immediateRender: false,
+          duration: 3,
+          opacity: finalOpacity
+        }, 0);
+        console.log("Creado asi ----");
+        console.log("Frame", arrayContentFrames[j]);
+        console.log("initial Z value", initialValue);
+        console.log("final  Z value", finalValue);
+        console.log("opacidad inicial", initialOpacity);
+        console.log("opacidad final", finalOpacity);
+        console.log("Trigger", currentContentTrigger);
         console.log("end -----");
       }
 

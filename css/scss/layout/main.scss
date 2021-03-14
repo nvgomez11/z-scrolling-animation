@@ -178,6 +178,21 @@
 }
 
 
+.cloud-trigger{
+    background-color: blueviolet;
+    opacity: 0.5;
+    position: absolute;
+    width: 130px;
+    height: 25vh;
+}
+
+.content-trigger{
+    background-color: greenyellow;
+    opacity: 0.5;
+    position: absolute;
+    width: 130px;
+    height: 25vh;
+}
 
 .trigger{
     background-color: red;
@@ -185,14 +200,6 @@
     position: absolute;
     width: 130px;
     height: 20vh;
-}
-
-.cloud-trigger{
-    background-color: blueviolet;
-    opacity: 0.5;
-    position: absolute;
-    width: 130px;
-    height: 25vh;
 }
 
 
