@@ -39,8 +39,8 @@
         left: 0;
         right: 0;
         margin: auto;
-        width: 84%;
-        height: 82%;
+        width: 90%;
+        height: 90vh;
 
         @media only screen and (min-device-width: 1366px) {
             width: 90%;
@@ -106,8 +106,8 @@
     height: 100%;
     z-index: 11;
 
-    img{
-        width: 80%;
+    &__title{
+        width: 90%;
         @media only screen and (min-device-width: 1366px){
             width: 50%;
         }
@@ -132,10 +132,22 @@
     
     }
 
+    &__cta{
+        margin: 20px 0px 20px 0px;
+    }
+
     &__cta-container{
 
     }
 
+}
+
+.arrow{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 45px;
 }
 
 .cta {
@@ -159,6 +171,13 @@
 	position:relative;
 	top:1px;
 }
+
+.cta-watch-film{
+    display: flex;
+    justify-content: center;
+}
+
+
 
 .trigger{
     background-color: red;
@@ -291,7 +310,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background-color: white;
+        //background-color: ;
         border: 2px solid white;
         border-radius: 25px;
         width: 7vw;
