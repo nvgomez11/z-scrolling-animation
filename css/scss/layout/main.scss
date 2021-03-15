@@ -8,11 +8,11 @@
 .trigger-pin{
     position: absolute;
     top: 0;
-    left: 50%;
-    width: 200px;
+    left: 75%;
+    width: 10px;
     height: calc(100% - 85vh);
     opacity: 0.5;
-    background-color: grey;
+    //background-color: grey;
     z-index: 1;
 }
 
@@ -20,7 +20,6 @@
     //background-color: aquamarine;
     position: relative;
     width: 100vw;  
-    // height: 300vh;
     margin-top: 50px;
     border: 3px solid pink;
     overflow-y: hidden;
@@ -144,10 +143,15 @@
 
 .arrow{
     position: absolute;
+    display: flex;
+    justify-content: center;
     left: 0;
     right: 0;
     margin: auto;
     bottom: 45px;
+    z-index: 12;
+    width: 100px;
+    cursor: pointer;
 }
 
 .cta {
@@ -178,55 +182,55 @@
 }
 
 .fadeout-trigger{
-    background-color: teal;
+    //background-color: teal;
     opacity: 0.5;
     position: absolute;
-    width: 130px;
+    width: 10px;
     height: 5vh;
+    left: 75vw;
 }
 
 
 .cloud-trigger{
-    background-color: blueviolet;
+    //background-color: blueviolet;
     opacity: 0.5;
     position: absolute;
-    width: 130px;
+    width: 10px;
     height: 25vh;
+    left: 75vw;
 }
 
 .content-trigger{
-    background-color: greenyellow;
+    // background-color: greenyellow;
     opacity: 0.5;
     position: absolute;
-    width: 130px;
+    width: 10px;
     height: 25vh;
+    left: 75vw;
 }
 
 .trigger{
-    background-color: red;
+    // background-color: red;
     opacity: 0.5;
     position: absolute;
-    width: 130px;
+    width: 10px;
     height: 20vh;
+    left: 75vw;
 }
 
 .fadein-trigger{
-    background-color: lightcoral;
+    // background-color: lightcoral;
     opacity: 0.5;
     position: absolute;
-    width: 130px;
+    width: 10px;
     height: 5vh;
+    left: 75vw;
 }
 
 .fade{
     opacity: 0;
 }
 
-
-.trigger1-anchor{
-    height: 50vh;
-    width: 100px;
-}
 
 .cloud{
     position: fixed;

@@ -1,8 +1,8 @@
 $( document ).ready(function() {
     console.log("AFTER READY");
 
-    //SET FARME HEIGHT
-    var amountSection = ($(".section").length * 100 ) + 'vh';
+    //SET FRAME HEIGHT
+    var amountSection = (  ($(".section").length * 100 ) - 20) + 'vh';
     console.log("amount of sections", amountSection);
     $(".frame").css('height', amountSection)
 
@@ -134,7 +134,7 @@ $( document ).ready(function() {
 
 
     //SET TRIGGER ID DINAMICALLY
-    $('.trigger').each(function(i) {
+    $('.fadeout-trigger').each(function(i) {
         $(this).attr('id', 'trigger'+(i.toString()));
     });
 
@@ -148,7 +148,7 @@ $( document ).ready(function() {
     //INSERT INDICATORS DYNAMICALLY
     $('.section').each(function(i) {
         var trigger = "#trigger" + (i.toString());
-        var indicator = '<a onclick="testing(\''+ trigger +'\')"><div></div></a>'
+        var indicator = '<a onclick="scrollIndicators(\''+ trigger +'\')"><div></div></a>'
         console.log("INDICATOR", indicator);
         $(".indicators-container__controls").append(indicator);
     });
@@ -160,8 +160,6 @@ $( document ).ready(function() {
         var sectionsLength = ((sections.length * 100)-120 ).toString() + 'vh';
         console.log("sections length", sectionsLength);
         $(".trigger-pin").height(sectionsLength);
-
-
 
         var opacityValues = [0, 1];
         console.log("opacity values are", opacityValues);
@@ -423,11 +421,11 @@ $( document ).ready(function() {
                     scrub: 2,
                     // onEnter onLeave onEnterBack onLeaveBack
                     toggleActions: "play none reverse none",
-                    markers: {
-                        startColor: "greenyellow", 
-                        endColor: "greenyellow",
-                        fontSize: '2.5rem'
-                    }
+                    // markers: {
+                    //     startColor: "greenyellow", 
+                    //     endColor: "greenyellow",
+                    //     fontSize: '2.5rem'
+                    // }
                 }
             });
             for(var j = 0; j < originalZcontentValues.length; j++){
@@ -496,11 +494,11 @@ $( document ).ready(function() {
                     scrub: 2,
                     // onEnter onLeave onEnterBack onLeaveBack
                     toggleActions: "play none reverse none",
-                    markers: {
-                        startColor: "teal", 
-                        endColor: "teal",
-                        fontSize: '2.5rem'
-                    }
+                    // markers: {
+                    //     startColor: "teal", 
+                    //     endColor: "teal",
+                    //     fontSize: '2.5rem'
+                    // }
                 }
             });
 
@@ -542,11 +540,11 @@ $( document ).ready(function() {
                     scrub: 2,
                     // onEnter onLeave onEnterBack onLeaveBack
                     toggleActions: "play none reverse none",
-                    markers: {
-                        startColor: "orange", 
-                        endColor: "orange",
-                        fontSize: '2.5rem'
-                    }
+                    // markers: {
+                    //     startColor: "orange", 
+                    //     endColor: "orange",
+                    //     fontSize: '2.5rem'
+                    // }
                 }
             });
 
@@ -571,9 +569,9 @@ $( document ).ready(function() {
             pin: ".sections-container",
             start: "top 6%",
             end: "bottom 0.5%",
-            markers: {
-                startColor: "orange", endColor: "orange", fontSize: "16px"
-            }
+            // markers: {
+            //     startColor: "orange", endColor: "orange", fontSize: "16px"
+            // }
         });
 
     }

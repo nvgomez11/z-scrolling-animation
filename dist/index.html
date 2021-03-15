@@ -38,8 +38,7 @@
 
             <div class="indicators-container">
                 <div class="indicators-container__controls">
-                    <!-- <a class="indicator" href="#frame-pointer"><div></div></a>
-                    <a class="indicator" href="#trigger1"><div></div></a> -->
+                    <!-- Indicators place -->
                 </div>
 
                 <div class="indicators-container__labels">
@@ -61,8 +60,6 @@
                 </ul>
             </div>  -->
 
-
-
             <section class="section frame__child ">
                 <img class="mobile section__bg-image" src="/dreams-background.8c65de1f.svg">
                 <img class="desktop section__bg-image" src="/dreams-background.8c65de1f.svg">
@@ -79,12 +76,8 @@
                     <img class="content__title" src="/title-video.a93cb795.svg">    
                     <a class="content__cta"><img src="/watch-film.7802e637.svg"></a>                     
                 </div>
-                <img class="arrow" src="/icon-arrow.6704f3c1.svg">
+                <a class="arrow" onclick="scrollArrow()"><img src="/icon-arrow.6704f3c1.svg"></a>
             </section>
-
-            <!-- <div class="trigger">
-                
-            </div> -->
 
             <section class="section frame__child ">
                 <img class="mobile section__bg-image" src="/hokkaido-background.b48d5685.svg">
@@ -112,11 +105,6 @@
                 </div>
             </section>
             
-
-            <!-- <div class="trigger"></div> -->
-       
-
-        
             <section class="section frame__child ">
                 <img class="mobile section__bg-image" src="/osaka-background.5639a115.svg">
                 <img class="desktop section__bg-image" src="/osaka-background.5639a115.svg">
@@ -140,31 +128,8 @@
                 </div>
             </section>
 
-            <!-- <div class="trigger">
-            
-            </div>
 
 
-            <section class="section frame__child ">
-                <img class="mobile section__bg-image" src="./img/dreams-background.svg"></img>
-                <img class="desktop section__bg-image" src="./img/dreams-background.svg"></img>
-                <div class="clouds-container">                
-                    <img class="crane craneTopLeft" src="./img/crane1.svg"></img>
-                    <img class="crane craneBottomLeft" src="./img/crane2.svg"></img>
-                    <img class="cloud topLeftCloud" src="./img/cloud1.svg"></img>
-                    <img class="cloud bottomLeftCloud" src="./img/cloud2.svg"></img>
-                    <img class="cloud topRightCloud" src="./img/cloud3.svg"></img> 
-                    <img class="cloud middleRightCloud" src="./img/cloud4.svg"></img>
-                    <img class="cloud bottomRightCloud" src="./img/cloud5.svg"></img>                
-                </div>
-                <div class="content">                
-                    <img class="content__title" src="./img/title-video.svg"></img>            
-                </div>
-            </section>
-
-            <div class="trigger">
-                
-            </div> -->
         </div>
 
         <div class="trigger-pin">
@@ -173,9 +138,28 @@
 
     </div>
 
-    <script>function testing(trigger) {
-  console.log($(trigger).offset().top);
-  window.scroll(0, $(trigger).offset().top - 30);
+    <script>function scrollIndicators(trigger) {
+  var lastTrigger = '#' + $(".fadeout-trigger").last().attr('id');
+
+  if (trigger == lastTrigger) {
+    window.scroll(0, $(trigger).offset().top - 200);
+  } else {
+    window.scroll(0, $(trigger).offset().top - 30);
+  }
+}</script>
+
+    <script>function scrollArrow() {
+  var lastSection = $(".section").last();
+  var parentSection = $(".arrow").parent(); //if parent is the last section, does not scroll
+
+  if (!lastSection.is(parentSection)) {
+    $(".section").each(function (i) {
+      if ($(this).is(parentSection)) {
+        var trigger = "#trigger" + (i + 1);
+        scrollIndicators(trigger);
+      }
+    });
+  }
 }</script>
 
     <div class="green zone">

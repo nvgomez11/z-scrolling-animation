@@ -119,9 +119,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"js/main.js":[function(require,module,exports) {
 $(document).ready(function () {
-  console.log("AFTER READY"); //SET FARME HEIGHT
+  console.log("AFTER READY"); //SET FRAME HEIGHT
 
-  var amountSection = $(".section").length * 100 + 'vh';
+  var amountSection = $(".section").length * 100 - 20 + 'vh';
   console.log("amount of sections", amountSection);
   $(".frame").css('height', amountSection); //SET SECTIONS PERSPECTIVE AND OPACITY
 
@@ -237,7 +237,7 @@ $(document).ready(function () {
     }
   }); //SET TRIGGER ID DINAMICALLY
 
-  $('.trigger').each(function (i) {
+  $('.fadeout-trigger').each(function (i) {
     $(this).attr('id', 'trigger' + i.toString());
   }); //for frame ponter proposes
 
@@ -246,7 +246,7 @@ $(document).ready(function () {
 
   $('.section').each(function (i) {
     var trigger = "#trigger" + i.toString();
-    var indicator = '<a onclick="testing(\'' + trigger + '\')"><div></div></a>';
+    var indicator = '<a onclick="scrollIndicators(\'' + trigger + '\')"><div></div></a>';
     console.log("INDICATOR", indicator);
     $(".indicators-container__controls").append(indicator);
   });
@@ -505,12 +505,12 @@ $(document).ready(function () {
           end: 'bottom 0px',
           scrub: 2,
           // onEnter onLeave onEnterBack onLeaveBack
-          toggleActions: "play none reverse none",
-          markers: {
-            startColor: "greenyellow",
-            endColor: "greenyellow",
-            fontSize: '2.5rem'
-          }
+          toggleActions: "play none reverse none" // markers: {
+          //     startColor: "greenyellow", 
+          //     endColor: "greenyellow",
+          //     fontSize: '2.5rem'
+          // }
+
         }
       });
 
@@ -574,12 +574,12 @@ $(document).ready(function () {
           end: 'bottom 0px',
           scrub: 2,
           // onEnter onLeave onEnterBack onLeaveBack
-          toggleActions: "play none reverse none",
-          markers: {
-            startColor: "teal",
-            endColor: "teal",
-            fontSize: '2.5rem'
-          }
+          toggleActions: "play none reverse none" // markers: {
+          //     startColor: "teal", 
+          //     endColor: "teal",
+          //     fontSize: '2.5rem'
+          // }
+
         }
       });
       fadeoutTl.fromTo(".fade", {
@@ -614,12 +614,12 @@ $(document).ready(function () {
           end: 'bottom 0px',
           scrub: 2,
           // onEnter onLeave onEnterBack onLeaveBack
-          toggleActions: "play none reverse none",
-          markers: {
-            startColor: "orange",
-            endColor: "orange",
-            fontSize: '2.5rem'
-          }
+          toggleActions: "play none reverse none" // markers: {
+          //     startColor: "orange", 
+          //     endColor: "orange",
+          //     fontSize: '2.5rem'
+          // }
+
         }
       });
       fadeinTl.fromTo(".fade", {
@@ -638,12 +638,10 @@ $(document).ready(function () {
       trigger: ".trigger-pin",
       pin: ".sections-container",
       start: "top 6%",
-      end: "bottom 0.5%",
-      markers: {
-        startColor: "orange",
-        endColor: "orange",
-        fontSize: "16px"
-      }
+      end: "bottom 0.5%" // markers: {
+      //     startColor: "orange", endColor: "orange", fontSize: "16px"
+      // }
+
     });
   }
 });
@@ -768,7 +766,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56336" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57194" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
