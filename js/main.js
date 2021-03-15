@@ -49,12 +49,11 @@ $( document ).ready(function() {
         }
     });
 
-    //INSERT TRIGGERS DYNAMICALLY
+    //INSERT SECTION TRIGGERS DYNAMICALLY
     $('.section').each(function(i) {
         var trigger = '<div class="trigger"></div>';
         $(".frame").append(trigger);
     });
-
 
     //INSERT CLOUD TRIGGERS DYNAMICALLY
     $('.section').each(function(i) {
@@ -69,6 +68,28 @@ $( document ).ready(function() {
         $(".frame").append(contentTrigger);
     });
 
+    //INSERT FADE-OUT TRIGGERS DYNAMICALLY
+    $('.section').each(function(i) {
+        var foTrigger = '<div class="fadeout-trigger"></div>';
+        $(".frame").append(foTrigger);
+    });
+
+    //INSER FADE-IN TRIGGERS DYNAMICALLY
+    $('.section').each(function(i) {
+        var fiTrigger = '<div class="fadein-trigger"></div>';
+        $(".frame").append(fiTrigger);
+    });
+
+
+    //SET FADE-OUT POSITION DINAMICALLY
+    var startingTriggerTop = 100
+    $('.fadeout-trigger').each(function(i) {
+        if(i==0){
+            $(this).css('top', '2vh');
+        }else{
+            $(this).css('top', ( (startingTriggerTop * i) + 2 ) + 'vh');
+        }
+    });
 
     //SET CLOUD TRIGGER POSITION DINAMICALLY
     var startingTriggerTop = 100
@@ -100,8 +121,15 @@ $( document ).ready(function() {
         }
     });
 
-
-
+    //SET FADE-IN POSITION DINAMICALLY
+    var startingTriggerTop = 100
+    $('.fadein-trigger').each(function(i) {
+        if(i==0){
+            $(this).css('top', '55vh');
+        }else{
+            $(this).css('top', ( (startingTriggerTop * i) + 55 ) + 'vh');
+        }
+    });
 
 
 
@@ -116,6 +144,7 @@ $( document ).ready(function() {
     $("pin-spacer").css('padding-bottom','0px');
 
 
+
     //INSERT INDICATORS DYNAMICALLY
     $('.section').each(function(i) {
         var trigger = "#trigger" + (i.toString());
@@ -123,7 +152,6 @@ $( document ).ready(function() {
         console.log("INDICATOR", indicator);
         $(".indicators-container__controls").append(indicator);
     });
-
 
 
     if(!$(".frame").hasClass('frame--edit')){
@@ -186,7 +214,6 @@ $( document ).ready(function() {
             console.log("final z values", finalZvalues);
     
             var tl = gsap.timeline({
-                onComplete: function(){ console.log("Hola")},
                 scrollTrigger: {
                     trigger: currentTrigger,
                     start: 'top 10px',
@@ -286,7 +313,6 @@ $( document ).ready(function() {
             console.log("final z cloud values", finalZvalues);
     
             var tcloud = gsap.timeline({
-                onComplete: function(){ console.log("Hola")},
                 scrollTrigger: {
                     trigger: currentCloudTrigger,
                     start: 'top 10px',
@@ -390,7 +416,6 @@ $( document ).ready(function() {
             console.log("final z values", finalZcontentValues);
     
             var timelineContent = gsap.timeline({
-                onComplete: function(){ console.log("Hola")},
                 scrollTrigger: {
                     trigger: currentContentTrigger,
                     start: 'top 10px',
@@ -444,8 +469,103 @@ $( document ).ready(function() {
             }
             console.log("NEXT TRIGGER ---------------");
         }
+
+
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        ////////////////////////FADE OUT///////////////////////////
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+
+        console.log("FADEOUT");
+
+        //GET TRIGGERS 
+        var fadeoutTriggers = document.querySelectorAll(".fadeout-trigger");
+        console.log("Triggers are", contentTriggers);
+            
+
+        for(var i = 0; i < fadeoutTriggers.length -1; i++){
+            var currentFadeOutTrigger = fadeoutTriggers[i];
+
+            var fadeoutTl = gsap.timeline({
+                duration: 2.5,
+                scrollTrigger: {
+                    trigger: currentFadeOutTrigger,
+                    start: 'top 10px',
+                    end: 'bottom 0px',
+                    scrub: 2,
+                    // onEnter onLeave onEnterBack onLeaveBack
+                    toggleActions: "play none reverse none",
+                    markers: {
+                        startColor: "teal", 
+                        endColor: "teal",
+                        fontSize: '2.5rem'
+                    }
+                }
+            });
+
+            fadeoutTl.fromTo(".fade", {        
+                immediateRender: false,
+                opacity: 1
+            }, {
+                immediateRender: false,
+                opacity: 0
+            }, 0);
+
+            console.log("Creado asi ----")
+            console.log("Trigger", currentFadeOutTrigger);
+            console.log("NEXT TRIGGER ---------------");
+        }
+
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+        ////////////////////////FADE IN///////////////////////////
+        /////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////
+
+        console.log("FADEIN");
+
+        //GET TRIGGERS 
+        var fadeinTriggers = document.querySelectorAll(".fadein-trigger");
+        console.log("Triggers are", fadeinTriggers);
+            
+
+        for(var i = 0; i < fadeinTriggers.length -1; i++){
+            var currentfadeinTrigger = fadeinTriggers[i];
+
+            var fadeinTl = gsap.timeline({
+                duration: 2.5,
+                scrollTrigger: {
+                    trigger: currentfadeinTrigger,
+                    start: 'top 10px',
+                    end: 'bottom 0px',
+                    scrub: 2,
+                    // onEnter onLeave onEnterBack onLeaveBack
+                    toggleActions: "play none reverse none",
+                    markers: {
+                        startColor: "orange", 
+                        endColor: "orange",
+                        fontSize: '2.5rem'
+                    }
+                }
+            });
+
+            fadeinTl.fromTo(".fade", {        
+                immediateRender: false,
+                opacity: 0
+            }, {
+                immediateRender: false,
+                opacity: 1
+            }, 0);
+
+            console.log("Creado asi ----")
+            console.log("Trigger", currentfadeinTrigger);
+            
+            console.log("NEXT TRIGGER ---------------");
+        }
     
         
+
         let st = ScrollTrigger.create({
             trigger: ".trigger-pin",
             pin: ".sections-container",

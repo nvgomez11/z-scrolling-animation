@@ -17,7 +17,7 @@
 }
 
 .frame{
-    background-color: aquamarine;
+    //background-color: aquamarine;
     position: relative;
     width: 100vw;  
     // height: 300vh;
@@ -177,6 +177,14 @@
     justify-content: center;
 }
 
+.fadeout-trigger{
+    background-color: teal;
+    opacity: 0.5;
+    position: absolute;
+    width: 130px;
+    height: 5vh;
+}
+
 
 .cloud-trigger{
     background-color: blueviolet;
@@ -200,6 +208,18 @@
     position: absolute;
     width: 130px;
     height: 20vh;
+}
+
+.fadein-trigger{
+    background-color: lightcoral;
+    opacity: 0.5;
+    position: absolute;
+    width: 130px;
+    height: 5vh;
+}
+
+.fade{
+    opacity: 0;
 }
 
 
