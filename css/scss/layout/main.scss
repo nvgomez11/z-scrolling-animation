@@ -1,3 +1,8 @@
+.frame.frame--edit{
+    width: 1000px !important;
+    height: 1000px !important;
+}
+
 .zone{
     height: 50vh;
 }
@@ -42,7 +47,7 @@
         height: 90vh;
 
         @media only screen and (min-device-width: 1366px) {
-            width: 90%;
+            width: 85%;
             height: 90vh;
         }
     }
@@ -342,7 +347,8 @@
         justify-content: center;
         align-items: center;
         //background-color: ;
-        border: 2px solid white;
+        border: 2px solid #f2f1ef;
+        background-color: #f2f1ef;
         border-radius: 25px;
         width: 7vw;
         padding-left: 0px;

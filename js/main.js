@@ -148,7 +148,7 @@ $( document ).ready(function() {
     //INSERT INDICATORS DYNAMICALLY
     $('.section').each(function(i) {
         var trigger = "#trigger" + (i.toString());
-        var indicator = '<a onclick="scrollIndicators(\''+ trigger +'\')"><div></div></a>'
+        var indicator = '<a class="single-indicator" onclick="scrollIndicators(\''+ trigger +'\')"><div></div></a>'
         console.log("INDICATOR", indicator);
         $(".indicators-container__controls").append(indicator);
     });
@@ -231,26 +231,34 @@ $( document ).ready(function() {
     
                 var initialOpacity = undefined; 
                 var finalOpacity = undefined;
+                var initialVisibility = undefined;
+                var finalVisibility = undefined;
     
                 if (finalValue === 500){
                     initialOpacity = 1
                     finalOpacity = 0
+                    initialVisibility = 'visible'
+                    finalVisibility = 'hidden'
                 }
                 if(finalValue === 0){
                     initialOpacity = 0
                     finalOpacity = 1
+                    initialVisibility = 'hidden'
+                    finalVisibility = 'visible'
                 }
             
                 tl.fromTo(arrayFrames[j], {
                     z: initialValue,
                     immediateRender: false,
                     duration: 3,
-                    opacity: initialOpacity
+                    autoAlpha: initialOpacity,
+                    
                 }, {
                     z: finalValue,
                     immediateRender: false,
                     duration: 3,
-                    opacity: finalOpacity
+                    autoAlpha: finalOpacity,
+                    
                 }, 0);
                 console.log("Creado asi ----")
                 console.log("Frame", arrayFrames[j]);
@@ -346,12 +354,12 @@ $( document ).ready(function() {
                     z: initialValue,
                     immediateRender: false,
                     duration: 3,
-                    opacity: initialOpacity
+                    autoAlpha: initialOpacity
                 }, {
                     z: finalValue,
                     immediateRender: false,
                     duration: 3,
-                    opacity: finalOpacity
+                    autoAlpha: finalOpacity
                 }, 0);
 
                 console.log("------------CLOUDS--------------")
@@ -449,12 +457,12 @@ $( document ).ready(function() {
                     z: initialValue,
                     immediateRender: false,
                     duration: 3,
-                    opacity: initialOpacity
+                    autoAlpha: initialOpacity
                 }, {
                     z: finalValue,
                     immediateRender: false,
                     duration: 3,
-                    opacity: finalOpacity
+                    autoAlpha: finalOpacity
                 }, 0);
                 console.log("Creado asi ----")
                 console.log("Frame", arrayContentFrames[j]);
@@ -550,10 +558,10 @@ $( document ).ready(function() {
 
             fadeinTl.fromTo(".fade", {        
                 immediateRender: false,
-                opacity: 0
+                autoAlpha: 0
             }, {
                 immediateRender: false,
-                opacity: 1
+                autoAlpha: 1
             }, 0);
 
             console.log("Creado asi ----")
@@ -574,120 +582,28 @@ $( document ).ready(function() {
             // }
         });
 
+
+        //HOVER INDICATORS LABELS
+        $(".single-indicator").hover( function(event){
+            var index = $(this).index();
+            $(".indicator-title").each( function(i){
+                if(i == index){
+                    $(this).css('visibility', 'visible');
+                }
+            })
+        });
+        
+        //HOVER ON MOUSE LEAVE INDICATORS LABELS
+        $(".single-indicator").mouseleave( function(event){
+            var index = $(this).index();
+            $(".indicator-title").each( function(i){
+                if(i == index){
+                    $(this).css('visibility', 'hidden');
+                }
+            })
+        });
     }
-
 });
-
-
-document.addEventListener('scroll', function(e) {
-    $(".section").each(function(i){
-        var zValue = parseFloat($(this).css('transform').split(',')[14]);
-        if(zValue>500 || zValue<-400){
-            $(this).css('visibility','hidden');
-        }else{
-            $(this).css('visibility','visible');
-        }
-    })
-});
-
-//HARDCODED WORKING
-// gsap.registerPlugin(ScrollTrigger);
-
-// var tl = gsap.timeline({
-//     scrollTrigger: {
-//         trigger: ".trigger1",
-//         start: 'top 5.5%',
-//         end: 'bottom 5.5%',
-//         scrub: 2,
-//         // onEnter onLeave onEnterBack onLeaveBack
-//         toggleActions: "play none reverse none",
-//         markers: {
-//             fontSize: '2rem'
-//         }
-//     }
-// }, 0);
-
-// tl.fromTo(".frame__1", {
-//         z: 0,
-//         duration: 1,
-//         opacity: 1
-//     }, {
-//         z: 500,
-//         duration: 3,
-//         opacity: 0
-// },0);
-
-// tl.fromTo(".frame__2", {
-//         z: -500,
-//         duration: 1,
-//         opacity: 0
-//     }, {
-//         z: 0,
-//         duration: 3,
-//         opacity: 1
-// },0);
-
-// tl.fromTo(".frame__3", {
-//         z: -1000,
-//         duration: 1,
-//         opacity: undefined
-//     }, {
-//         z: -500,
-//         duration: 1,
-//         opacity: undefined
-// },0);
-
-// ///////////////////////////////////
-
-// var tl2 = gsap.timeline({
-//     scrollTrigger: {
-//         trigger: ".trigger2",
-//         start: 'top 5.5%',
-//         end: 'bottom 5.5%',
-//         scrub: 2,
-//         // onEnter onLeave onEnterBack onLeaveBack
-//         toggleActions: "play none reverse none",
-//         markers: {
-//             fontSize: '2rem'
-//         }
-//     }
-// }, 0);
-
-// tl2.fromTo(".frame__1", {
-//         z: 500,
-//         duration: 1,
-//         opacity: undefined
-//     }, {
-//         z: 1000,
-//         duration: 1,
-//         opacity: undefined
-// },0);
-
-// tl2.fromTo(".frame__2", {
-//         z: 0,
-//         duration: 1,
-//         opacity: 1
-//     }, {
-//         z: 500,
-//         duration: 3,
-//         opacity: 0
-// },0);
-
-// tl2.fromTo(".frame__3", {
-//         z: -500,
-//         duration: 1,
-//         opacity: 0
-//     }, {
-//         z: 0,
-//         duration: 1,
-//         opacity: 1
-// },0);
-
-
-
-
-
-
 
 
 
